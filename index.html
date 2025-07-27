@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation Club</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        video {
+            width: 600px;
+            height: 600px;
+            object-fit: cover;
+        }
+        
+        @media (max-width: 600px) {
+            video {
+                width: 100vw;
+                height: 100vw;
+            }
+        }
+        
+        .download-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #000;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .download-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <video controls autoplay muted loop>
+        <source src="output_video.mp4" type="video/mp4">
+    </video>
+    
+    <a href="p.key" download class="download-btn">↓</a>
+</body>
+</html>
