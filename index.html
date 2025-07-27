@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presentation Club</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <style>
         * {
             margin: 0;
@@ -21,14 +21,44 @@
             position: relative;
         }
         
-        video {
+        .video-container {
+            position: relative;
             width: 600px;
             height: 600px;
+        }
+        
+        video {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        video.loaded {
+            opacity: 1;
+        }
+        
+        .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         
         @media (max-width: 600px) {
-            video {
+            .video-container {
                 width: 100vw;
                 height: 100vw;
             }
@@ -50,6 +80,7 @@
             text-decoration: none;
             color: white;
             font-size: 18px;
+            z-index: 10;
         }
         
         .download-btn:hover {
@@ -58,10 +89,30 @@
     </style>
 </head>
 <body>
-    <video controls autoplay muted loop>
-        <source src="output_video.mp4" type="video/mp4">
-    </video>
+    <div class="video-container">
+        <div class="loader" id="loader"></div>
+        <video id="video" controls muted loop preload="metadata">
+            <source src="output_video.mp4" type="video/mp4">
+        </video>
+    </div>
     
-    <a href="p.key" download class="download-btn">↓</a>
+    <a href="p.key" download="p.key" class="download-btn">↓</a>
+    
+    <script>
+        const video = document.getElementById('video');
+        const loader = document.getElementById('loader');
+        
+        video.addEventListener('loadeddata', function() {
+            video.classList.add('loaded');
+            loader.classList.add('hidden');
+        });
+        
+        video.addEventListener('canplaythrough', function() {
+            if (!video.classList.contains('loaded')) {
+                video.classList.add('loaded');
+                loader.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>

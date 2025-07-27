@@ -8,7 +8,8 @@
       "Bash(gh repo create:*)",
       "Bash(netlify deploy:*)",
       "Bash(netlify init:*)",
-      "Bash(netlify sites:create:*)"
+      "Bash(netlify sites:create:*)",
+      "Bash(gh repo rename:*)"
     ],
     "deny": []
   }
