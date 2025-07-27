@@ -31,7 +31,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.3s ease;
         }
         
@@ -91,8 +91,9 @@
 <body>
     <div class="video-container">
         <div class="loader" id="loader"></div>
-        <video id="video" controls muted loop preload="metadata">
+        <video id="video" controls muted loop preload="auto">
             <source src="output_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     </div>
     
@@ -102,17 +103,41 @@
         const video = document.getElementById('video');
         const loader = document.getElementById('loader');
         
+        console.log('Video element:', video);
+        console.log('Video src:', video.currentSrc || 'No src loaded');
+        
+        video.addEventListener('loadstart', function() {
+            console.log('Video loading started');
+        });
+        
+        video.addEventListener('loadedmetadata', function() {
+            console.log('Video metadata loaded');
+        });
+        
         video.addEventListener('loadeddata', function() {
+            console.log('Video data loaded');
             video.classList.add('loaded');
             loader.classList.add('hidden');
         });
         
         video.addEventListener('canplaythrough', function() {
+            console.log('Video can play through');
             if (!video.classList.contains('loaded')) {
                 video.classList.add('loaded');
                 loader.classList.add('hidden');
             }
         });
+        
+        video.addEventListener('error', function(e) {
+            console.error('Video error:', e);
+            console.error('Video error details:', video.error);
+        });
+        
+        // Fallback: hide loader after 3 seconds regardless
+        setTimeout(function() {
+            console.log('Fallback: hiding loader after 3 seconds');
+            loader.classList.add('hidden');
+        }, 3000);
     </script>
 </body>
 </html>

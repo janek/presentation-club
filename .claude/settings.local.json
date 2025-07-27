@@ -9,7 +9,9 @@
       "Bash(netlify deploy:*)",
       "Bash(netlify init:*)",
       "Bash(netlify sites:create:*)",
-      "Bash(gh repo rename:*)"
+      "Bash(gh repo rename:*)",
+      "Bash(ls:*)",
+      "Bash(python3:*)"
     ],
     "deny": []
   }
